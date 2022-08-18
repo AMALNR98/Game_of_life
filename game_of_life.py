@@ -27,3 +27,26 @@ def display(game_matrix):
                 columns.append("0")
         rows.append("\t".join(columns))
     return "\n\n\n".join(rows)
+
+def main(game_matrix):
+    for i in range(0,20):
+        print("generation {}".format(i))
+        print(display(game_matrix))
+        game_matrix = rules_for_gameoflife(game_matrix)
+        flag = False
+        for row in game_matrix:
+            if 1 in row:
+                flag = True
+                break
+        if not flag:
+            print(f"generation {i+1}")
+            print(display(game_matrix))
+            break
+        time.sleep(1)
+if __name__ == "__main__":
+    game_matrix = [[0, 0, 0, 0, 0],
+                   [1, 0, 1, 0, 0],
+                   [0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0]]
+    main(game_matrix)
