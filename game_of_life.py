@@ -14,3 +14,16 @@ def neighboring_cells(game_matrix, row, column):
             if game_matrix[next_row][next_column] == 1:
                 alive_members += 1
     return alive_members
+
+def display(game_matrix):
+    size = len(game_matrix)
+    rows = []
+    for raw in range(size):
+        columns = []
+        for column in range(size):
+            if game_matrix[raw][column] == 1:
+                columns.append("1")
+            else:
+                columns.append("0")
+        rows.append("\t".join(columns))
+    return "\n\n\n".join(rows)
