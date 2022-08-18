@@ -28,11 +28,29 @@ def display(game_matrix):
         rows.append("\t".join(columns))
     return "\n\n\n".join(rows)
 
+def rules_gameoflife(game_matrix):
+    referral_matrix = [[0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0]]
+    rows = len(game_matrix)
+    columns = len(game_matrix)
+    for row in range(rows):
+        for column in range(columns):
+            if neighboring_cells(game_matrix, row, column) in [2, 3] and game_matrix[row][column] == 1:
+                referral_matrix[row][column] = 1
+            elif neighboring_cells(game_matrix, row, column) == 3 and game_matrix[row][column] == 0:
+                referral_matrix[row][column] = 1
+            else:
+                referral_matrix[row][column] = 0
+    return referral_matrix
+
 def main(game_matrix):
     for i in range(0,20):
         print("generation {}".format(i))
         print(display(game_matrix))
-        game_matrix = rules_for_gameoflife(game_matrix)
+        game_matrix = rules_gameoflife(game_matrix)
         flag = False
         for row in game_matrix:
             if 1 in row:
